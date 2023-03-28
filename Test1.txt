@@ -1,1 +1,197 @@
 I am shubham
+
+Binary Search
+#include <iostream>  
+  
+using namespace std;  
+int main ()  
+{  
+    // declaration of the variables and array  
+    int arr[100], st, mid, end, i, num, tgt;  
+      
+    cout << " Define the size of the array: " << endl;  
+    cin >> num; // get size  
+      
+    // enter only sorted array  
+        cout << " Enter the values in sorted array either ascending or descending order: " << endl;  
+    // use for loop to iterate values  
+    for (i = 0; i < num; i++)  
+    {  
+        cout << " arr [" << i << "] = ";  
+        cin >> arr[i];  
+    }  
+      
+    // initialize the starting and ending variable's values  
+    st = 0;  
+    end = num - 1; // size of array (num) - 1  
+      
+    // define the item or value to be search  
+    cout << " Define a value to be searched from sorted array: " << endl;  
+    cin >> tgt;  
+      
+    // use while loop to check 'st', should be less than equal to 'end'.  
+    while ( st <= end)  
+    {  
+        // get middle value by splitting into half  
+        mid = ( st + end ) / 2;  
+        /* if we get the target value at mid index, print the position and exit from the program. */  
+        if (arr[mid] == tgt)  
+        {  
+            cout << " Element is found at index " << (mid + 1);  
+            exit (0); // use for exit program the program  
+        }  
+        // check the value of target element is greater than the mid element' value  
+        else if ( tgt > arr[mid])  
+        {  
+            st = mid + 1; // set the new value for st variable  
+        }  
+          
+        // check the value of target element is less than the mid element' value  
+        else if ( tgt < arr[mid])  
+        {  
+            end = mid - 1; // set the new value for end variable  
+        }  
+    }  
+    cout << " Number is not found. " << endl;  
+    return 0;  
+}
+
+Quick sort
+#include<iostream>
+using namespace std;
+
+void swap(int arr[] , int pos1, int pos2){
+	int temp;
+	temp = arr[pos1];
+	arr[pos1] = arr[pos2];
+	arr[pos2] = temp;
+}
+
+int partition(int arr[], int low, int high, int pivot){
+	int i = low;
+	int j = low;
+	while( i <= high){
+		if(arr[i] > pivot){
+			i++;
+		}
+		else{
+			swap(arr,i,j);
+			i++;
+			j++;
+		}
+	}
+	return j-1;
+}
+
+void quickSort(int arr[], int low, int high){
+	if(low < high){
+	int pivot = arr[high];
+	int pos = partition(arr, low, high, pivot);
+	
+	quickSort(arr, low, pos-1);
+	quickSort(arr, pos+1, high);
+	}
+}
+
+int main()
+{
+	int n ;
+	cout << "Size Of Array: ";
+	cin>>n;
+	int arr[n];
+	cout << "Elements Of Array: ";
+	for( int i = 0 ; i < n; i++){
+		cin>> arr[i];
+	}
+	quickSort(arr, 0 , n-1);
+	cout<<"The sorted array is: ";
+	for( int i = 0 ; i < n; i++){
+		cout<< arr[i]<<"\t";
+	}
+}
+
+Strassen Matrix 
+
+#include<stdio.h>
+
+int main(){
+
+  int a[2][2], b[2][2], c[2][2], i, j;
+
+  int m1, m2, m3, m4 , m5, m6, m7;
+
+  printf("Enter the 4 elements of first matrix: ");
+
+  for(i = 0;i < 2; i++)
+
+      for(j = 0;j < 2; j++)
+
+           scanf("%d", &a[i][j]);
+
+  printf("Enter the 4 elements of second matrix: ");
+
+  for(i = 0; i < 2; i++)
+
+      for(j = 0;j < 2; j++)
+
+           scanf("%d", &b[i][j]);
+
+  printf("\nThe first matrix is\n");
+
+  for(i = 0; i < 2; i++){
+
+      printf("\n");
+
+      for(j = 0; j < 2; j++)
+
+           printf("%d\t", a[i][j]);  }
+
+  printf("\nThe second matrix is\n");
+
+  for(i = 0;i < 2; i++){
+
+      printf("\n");
+
+      for(j = 0;j < 2; j++)
+
+           printf("%d\t", b[i][j]);
+
+  }
+
+  m1= (a[0][0] + a[1][1]) * (b[0][0] + b[1][1]);
+
+  m2= (a[1][0] + a[1][1]) * b[0][0];
+
+  m3= a[0][0] * (b[0][1] - b[1][1]);
+
+  m4= a[1][1] * (b[1][0] - b[0][0]);
+
+  m5= (a[0][0] + a[0][1]) * b[1][1];
+
+  m6= (a[1][0] - a[0][0]) * (b[0][0]+b[0][1]);
+
+  m7= (a[0][1] - a[1][1]) * (b[1][0]+b[1][1]);
+
+  c[0][0] = m1 + m4- m5 + m7;
+
+  c[0][1] = m3 + m5;
+
+  c[1][0] = m2 + m4;
+
+  c[1][1] = m1 - m2 + m3 + m6;
+
+   printf("\nAfter multiplication using Strassen's algorithm \n");
+
+   for(i = 0; i < 2 ; i++){
+
+      printf("\n");
+
+      for(j = 0;j < 2; j++)
+
+           printf("%d\t", c[i][j]);
+
+   }
+
+   return 0;
+
+}
